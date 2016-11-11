@@ -2,7 +2,12 @@
 
 var Rx = require('rx');
 var s3 = require('s3');
-var client = s3.createClient({});
+var client = s3.createClient({
+  s3Options: {
+    accessKeyId: process.env.S3_KEY,
+    secretAccessKey: process.env.S3_SECRET
+  }
+});
 
 var uploader = function (remotePath, options) {
   return Rx.Observable.create(function (observer) {
